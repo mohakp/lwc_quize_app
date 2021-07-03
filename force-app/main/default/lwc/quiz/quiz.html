@@ -1,0 +1,23 @@
+<template>
+    <lightning-card  title="Quiz">
+        <form>
+            <template for:each={questions} for:item="item">
+                <lightning-card key={item.id} class="slds-m-around_medium">
+                    <p class="slds-p-around_medium"><strong>{item.id} {item.question}</strong></p>
+                        <lightning-radio-group name={item.id}
+                            options={item.options}
+                            onchange={changeHandler}
+                            type="radio" class="slds-has-dividers_top-space"></lightning-radio-group>
+                </lightning-card>
+            </template>
+            <template if:true={submitted}>
+                <lightning-card class="slds-m-around_medium">
+                    <p class="slds-box">You have scored {correctAnswers} out of {totalAnswers}</p>
+                </lightning-card>
+            </template>
+            <lightning-button variant="brand" type="submit" label="Submit" class="slds-p-around_medium" disabled={allSelected} onclick={submitHandler}></lightning-button>
+            <lightning-button variant="brand" label="Reset" class="slds-p-around_medium" onclick={resetHandler}></lightning-button>
+            
+        </form>
+    </lightning-card>
+</template>
